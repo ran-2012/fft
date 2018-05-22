@@ -11,7 +11,7 @@ using namespace std;
 
 constexpr double pi = 3.1415926;
 
-auto fft(const vector<double> &sig)
+auto raw_fft(const vector<double> &sig, const int type = 1)
 {
 	vector<complex<double>> ret;
 	const auto size = sig.size();
@@ -38,10 +38,10 @@ auto fft(const vector<double> &sig)
 		vector<complex<double>> temp;
 		temp.resize(size);
 		auto groupsize = 2 * r;
-		auto omega = [groupsize](double x)
+		auto omega = [groupsize, type](double x)
 		{
 			++x;
-			return exp(-complex<double>(0, 2 * x * pi / groupsize));
+			return exp(-complex<double>(0, type * 2 * x * pi / groupsize));
 		};
 		for (size_t n = 0; n < (size / groupsize); ++n)
 		{
@@ -54,4 +54,14 @@ auto fft(const vector<double> &sig)
 		ret = move(temp);
 	}
 	return ret;
+}
+
+auto fft(const vector<double> &data)
+{
+	return raw_fft(data, 1);
+}
+
+auto afft(const vector<double> &data)
+{
+	return raw_fft(data, -1);
 }
