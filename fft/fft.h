@@ -11,7 +11,8 @@ using namespace std;
 
 constexpr double pi = 3.1415926;
 
-auto raw_fft(const vector<double> &sig, const int type = 1)
+template<typename datatype>
+auto raw_fft(const vector<datatype> &sig, const int type = 1)
 {
 	vector<complex<double>> ret;
 	const auto size = sig.size();
@@ -56,12 +57,14 @@ auto raw_fft(const vector<double> &sig, const int type = 1)
 	return ret;
 }
 
-auto fft(const vector<double> &data)
+template<typename datatype>
+auto fft(const vector<datatype> &data)
 {
 	return raw_fft(data, 1);
 }
 
-auto afft(const vector<double> &data)
+template<typename datatype>
+auto afft(const vector<datatype> &data)
 {
 	return raw_fft(data, -1);
 }
