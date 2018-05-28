@@ -9,6 +9,7 @@ using namespace std;
 int main()
 {
 	ofstream out("data.txt");
+	ofstream out2("raw.txt");
 	//Éú³ÉÕıÏÒ²¨
 	auto generateSineWave = [](double f, double phi, double a)
 	{
@@ -52,9 +53,14 @@ int main()
 		raw.push_back(signal(i*delta));
 	}
 	auto freq = fft(raw);
+	auto rawdata = afft(freq);
 	for (auto i : freq)
 	{
 		out << abs(i) << endl;
+	}
+	for (int i = 0; i < n; ++i)
+	{
+		out2 << raw[i] << '\t' << rawdata[i].real() << endl;;
 	}
 	return 0;
 }

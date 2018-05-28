@@ -9,11 +9,10 @@
 
 using namespace std;
 
-constexpr double pi = 3.1415926;
-
 template<typename datatype>
 auto raw_fft(const vector<datatype> &sig, const int type = 1)
 {
+	constexpr double pi = 3.1415926;
 	vector<complex<double>> ret;
 	const auto size = sig.size();
 	ret.resize(size);
