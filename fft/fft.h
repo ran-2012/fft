@@ -40,17 +40,17 @@ auto raw_fft(const vector<datatype> &sig, const int type = 1)
 		auto groupsize = 2 * r;
 		auto omega = [groupsize, type, pi](double x)
 		{
-			++x;
+			//++x;
 			return exp(-complex<double>(0, type * 2 * x * pi / groupsize));
 		};
-		for (size_t n = 0; n < (size / groupsize); ++n)
+		for (size_t k = 0; k < size; k+=groupsize)
 		{
 			for (size_t off = 0; off < r; ++off)
 			{
-				temp[n*groupsize + off] 
-					= ret[n*groupsize + off] + omega(off)*ret[n*groupsize + off + r];
-				temp[n*groupsize + off + r] 
-					= ret[n*groupsize + off] - omega(off)*ret[n*groupsize + off + r];
+				temp[k + off] 
+					= ret[k + off] + omega(off)*ret[k + off + r];
+				temp[k + off + r] 
+					= ret[k + off] - omega(off)*ret[k + off + r];
 			}
 		}
 		ret = move(temp);

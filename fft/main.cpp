@@ -60,7 +60,7 @@ int main()
 	}
 	for (int i = 0; i < n; ++i)
 	{
-		out2 << raw[i] << '\t' << rawdata[i].real() << endl;;
+		out2 << raw[i] << '\t' << rawdata[i].real()/n << endl;;
 	}
 	return 0;
 }
