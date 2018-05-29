@@ -32,8 +32,6 @@ auto raw_fft(const vector<datatype> &sig, const int type = 1)
 	for (int i = 0; i != size; ++i)
 	{
 		ret[reserve(i, size)] = sig[i];
-		if (type == -1)
-			ret[i] /= datatype(size);
 	}
 	for (size_t r = 1; r < size; r <<= 1)
 	{
@@ -69,5 +67,8 @@ auto fft(const vector<datatype> &data)
 template<typename datatype>
 auto afft(const vector<datatype> &data)
 {
-	return raw_fft(data, -1);
+	auto ret = raw_fft(data, -1);
+	for (auto &i : ret)
+		i /= data.size();
+	return ret;
 }

@@ -262,3 +262,5 @@ __pycache__/
 /fft.sln
 /fft/fft.vcxproj.filters
 /fft/fft.vcxproj
+/fft/raw.txt
+/fft/data.txt
