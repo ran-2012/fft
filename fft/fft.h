@@ -32,6 +32,8 @@ auto raw_fft(const vector<datatype> &sig, const int type = 1)
 	for (int i = 0; i != size; ++i)
 	{
 		ret[reserve(i, size)] = sig[i];
+		if (type == -1)
+			ret[i] /= datatype(size);
 	}
 	for (size_t r = 1; r < size; r <<= 1)
 	{
